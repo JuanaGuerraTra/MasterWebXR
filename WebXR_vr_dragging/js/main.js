@@ -15,6 +15,7 @@ let aMovingObject;
 let groupDraggables;
 let intersectPoint;
 let intersectObject;
+let container;
 
 let raycaster;
 const pointer = new THREE.Vector2();
@@ -25,7 +26,8 @@ animate();
 function init() {
 
     scene = new THREE.Scene();
-    
+    container = document.createElement( 'div' );
+    document.body.appendChild( container );
     //crear caja
     const aBoxGeometry = new THREE.BoxGeometry( 10, 2, 10 );
     const material = new THREE.MeshStandardMaterial( { color: 0x00ff00 } );
@@ -51,10 +53,20 @@ function init() {
     camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
     camera.position.z = 60;
     
+    /*renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );*/
+  
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( renderer.domElement );
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.shadowMap.enabled = true;
+    renderer.xr.enabled = true;
+    container.appendChild( renderer.domElement );
+
+    document.body.appendChild( VRButton.createButton( renderer ) );
     
     controller1 = renderer.xr.getController( 0 );
     controller1.addEventListener( 'selectstart', onSelectStart );
@@ -288,9 +300,26 @@ function onWindowResize() {
 
 }
 
-function animate() {
+/*function animate() {
 
     requestAnimationFrame( animate );
+    renderer.render( scene, camera );
+
+}*/
+
+function animate() {
+
+    renderer.setAnimationLoop( render );
+
+}
+
+function render() {
+
+    cleanIntersected();
+
+    intersectObjects( controller1 );
+    intersectObjects( controller2 );
+
     renderer.render( scene, camera );
 
 }
