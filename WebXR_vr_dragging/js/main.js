@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
-let tempMatrix; 
+//let tempMatrix; 
 
 let camera, scene, renderer;
 
@@ -16,6 +16,9 @@ let groupDraggables;
 let intersectPoint;
 let intersectObject;
 let container;
+
+const intersected = [];
+const tempMatrix = new THREE.Matrix4();
 
 let raycaster;
 const pointer = new THREE.Vector2();
@@ -306,6 +309,33 @@ function onWindowResize() {
     renderer.render( scene, camera );
 
 }*/
+
+function intersectObjects( controller ) {
+
+    // Do not highlight when already selected
+
+    if ( controller.userData.selected !== undefined ) return;
+
+    const line = controller.getObjectByName( 'line' );
+    const intersections = getIntersections( controller );
+
+    if ( intersections.length > 0 ) {
+
+        const intersection = intersections[ 0 ];
+
+        const object = intersection.object;
+        object.material.emissive.r = 1;
+        intersected.push( object );
+
+        line.scale.z = intersection.distance;
+
+    } else {
+
+            line.scale.z = 5;
+
+    }
+
+}
 
 function cleanIntersected() {
 
