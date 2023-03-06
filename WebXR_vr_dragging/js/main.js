@@ -307,6 +307,18 @@ function onWindowResize() {
 
 }*/
 
+function cleanIntersected() {
+
+    while ( intersected.length ) {
+
+            const object = intersected.pop();
+            object.material.emissive.r = 0;
+
+    }
+
+}
+
+
 function animate() {
 
     renderer.setAnimationLoop( render );
