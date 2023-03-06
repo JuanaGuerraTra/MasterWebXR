@@ -82,6 +82,14 @@ function init() {
     controllerGrip1.add( controllerModelFactory.createControllerModel( controllerGrip1 ) );
     scene.add( controllerGrip1 );
     
+    const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+
+    const line = new THREE.Line( geometry );
+    line.name = 'line';
+    line.scale.z = 5;
+
+    controller1.add( line.clone() );
+    
     window.addEventListener( 'resize', onWindowResize );
     window.addEventListener( 'pointerdown', onPointerDown );
     window.addEventListener( 'pointerup', onPointerUp );
@@ -304,10 +312,8 @@ function onWindowResize() {
 }
 
 /*function animate() {
-
     requestAnimationFrame( animate );
     renderer.render( scene, camera );
-
 }*/
 
 function intersectObjects( controller ) {
@@ -360,7 +366,7 @@ function render() {
     cleanIntersected();
 
     intersectObjects( controller1 );
-    intersectObjects( controller2 );
+    //intersectObjects( controller2 );
 
     renderer.render( scene, camera );
 
