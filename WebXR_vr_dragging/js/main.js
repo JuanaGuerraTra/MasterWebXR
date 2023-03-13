@@ -91,9 +91,9 @@ function init() {
     controller1.add( line.clone() );
     
     window.addEventListener( 'resize', onWindowResize );
-    //window.addEventListener( 'pointerdown', onPointerDown );
-    //window.addEventListener( 'pointerup', onPointerUp );
-    //window.addEventListener( 'mousemove', onPointerMove );
+    window.addEventListener( 'pointerdown', onPointerDown );
+    window.addEventListener( 'pointerup', onPointerUp );
+    window.addEventListener( 'mousemove', onPointerMove );
     initSkinnedMesh();
     scene.add( groupDraggables );
 
