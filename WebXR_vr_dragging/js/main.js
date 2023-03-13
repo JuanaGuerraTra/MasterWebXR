@@ -39,7 +39,7 @@ function init() {
     aMovingObject.HexNotSelected = material.emissive.getHex();
     aMovingObject.HexSelected =  0xff0000;
     aMovingObject.isIntersectable = true;
-    aMovingObject.position.set(0, 30, -50);
+    aMovingObject.position.set(0, 30, -20);
  
     scene.add( aMovingObject );
     //inicializamos variable para usar después. 
@@ -225,7 +225,7 @@ function initSkinnedMesh() {
     scene.add( skinnedMesh );
     
     //mover hacia atrás
-    skeleton.bones[0].position.z = -50;
+    skeleton.bones[0].position.z = -20;
     
 
 }
