@@ -225,7 +225,7 @@ function initSkinnedMesh() {
     scene.add( skinnedMesh );
     
     //mover hacia atrás
-    skeleton.bones[0].position.z = 0
+    skeleton.bones[0].position.z = -50;
     
 
 }
