@@ -39,7 +39,7 @@ function init() {
     aMovingObject.HexNotSelected = material.emissive.getHex();
     aMovingObject.HexSelected =  0xff0000;
     aMovingObject.isIntersectable = true;
-    aMovingObject.position.set(0, 30, 0);
+    aMovingObject.position.set(0, 30, -20);
  
     scene.add( aMovingObject );
     //inicializamos variable para usar después. 
@@ -54,7 +54,7 @@ function init() {
     scene.add( hemiLight );
     
     camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.z = 200
+    camera.position.z = 60;
     
     /*renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -223,6 +223,9 @@ function initSkinnedMesh() {
     skinnedMesh.bind( skeleton );
 
     scene.add( skinnedMesh );
+    
+    //mover hacia atrás
+    skeleton.bones[0].position.z = -20;
     
 
 }
